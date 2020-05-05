@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Int'l phrases for "Happy New Year!" -- from #freenode-newyears{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+    }
+</style>
+
+<div class="greetings-wrapper">
+
+    <!-- <h1>Greetings</h1> -->
+    <p>That noisy bunch in #freenode-newyears on irc.<a href="http://freenode.net/">freenode.net</a> was
+        filling my logs at an incredible pace, so why not making sth. useful out of it? ;)</p>
+    <p>I piped my logs with cron into awk every minute, parsing for lines starting with <i>hny</i> followed
+        by what was meant to be an Isocode country-language description. Well, at first... ;)<br />Those
+        lines got cleaned up a bit and were send with scp to a public webserver, where the folks soon
+        started to surpass each other with true nerdy behaviour...</p>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+        <!-- <tr>
+            <td colspan="3" id="nav">
+                <p>That noisy bunch in #freenode-newyears on irc.<a href="http://freenode.net/">freenode.net</a> was
+                    filling my logs at an incredible pace, so why not making sth. useful out of it? ;)</p>
+                <p>I piped my logs with cron into awk every minute, parsing for lines starting with <i>hny</i> followed
+                    by what was meant to be an Isocode country-language description. Well, at first... ;)<br />Those
+                    lines got cleaned up a bit and were send with scp to a public webserver, where the folks soon
+                    started to surpass each other with true nerdy behaviour...</p>
+            </td>
+        </tr> -->
+
+
+        {% for greeting in greetings %}
+        {% set rowClass = loop.index is odd ? 'reih' : 'glied' %}
+        <tr class="{{ rowClass }}">
+            <td class="time">{{ greeting.gmt|date("c") }}</td>
+            <td class="iso">{{ greeting.isocode }}</td>
+            <td class="phrase">{{ greeting.greeting }}<span class="author">'.' ({{ greeting.nick }})</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</div>
+{% endblock %}
